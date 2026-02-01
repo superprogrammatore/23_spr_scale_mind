@@ -1,4 +1,4 @@
-import { Brain, Pause, Play, RotateCcw, Info, Book, HelpCircle } from 'lucide-react';
+import { Brain, Pause, Play, RotateCcw, Info, Book, HelpCircle, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +20,7 @@ interface HeaderProps {
   onReset: () => void;
   onOpenConcepts: () => void;
   onOpenOnboarding: () => void;
+  onLogout: () => void;
 }
 
 export function Header({ 
@@ -27,7 +28,8 @@ export function Header({
   onTogglePause, 
   onReset,
   onOpenConcepts,
-  onOpenOnboarding
+  onOpenOnboarding,
+  onLogout
 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border/50">
@@ -138,6 +140,22 @@ export function Header({
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Reset simulazione</TooltipContent>
+            </Tooltip>
+            
+            <div className="w-px h-6 bg-border mx-1" />
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={onLogout}
+                  className="text-muted-foreground hover:text-destructive"
+                >
+                  <LogOut className="w-4 h-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Esci dall'app</TooltipContent>
             </Tooltip>
           </div>
         </div>

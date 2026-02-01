@@ -12,6 +12,8 @@ import { SystemGauge } from '@/components/SystemGauge';
 import { TrafficFlow } from '@/components/TrafficFlow';
 import { Onboarding } from '@/components/Onboarding';
 import { ConceptsPanel } from '@/components/ConceptsPanel';
+import { LoginScreen } from '@/components/LoginScreen';
+import { isAuthenticated, logout } from '@/lib/auth';
 import { SystemStatus } from '@/types/simulation';
 
 /**
@@ -40,9 +42,17 @@ function Index() {
     reset
   } = useSimulation();
   
+  // Stato per autenticazione
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   // Stato per onboarding e pannelli
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [showConcepts, setShowConcepts] = useState(false);
+  
+  // Controlla autenticazione all'avvio
+  useEffect(() => {
+    setIsLoggedIn(isAuthenticated());
+  }, []);
   
   // Controlla se è la prima visita
   useEffect(() => {
@@ -51,6 +61,15 @@ function Index() {
       setShowOnboarding(false);
     }
   }, []);
+  
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+  
+  const handleLogout = () => {
+    logout();
+    setIsLoggedIn(false);
+  };
   
   const handleOnboardingComplete = () => {
     setShowOnboarding(false);
@@ -84,6 +103,11 @@ function Index() {
       description: 'Troppo carico! Gli utenti vedono errori e ritardi significativi.'
     }
   };
+  
+  // Se non autenticato, mostra la schermata di login
+  if (!isLoggedIn) {
+    return <LoginScreen onLoginSuccess={handleLoginSuccess} />;
+  }
   
   return (
     <div className="min-h-screen bg-background grid-pattern">
@@ -137,6 +161,7 @@ function Index() {
             onReset={reset}
             onOpenConcepts={() => setShowConcepts(true)}
             onOpenOnboarding={() => setShowOnboarding(true)}
+            onLogout={handleLogout}
           />
           
           <main className="container mx-auto px-4 py-8">
