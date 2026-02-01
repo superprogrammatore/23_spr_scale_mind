@@ -193,19 +193,6 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
             </Button>
           </form>
 
-          {/* Info sicurezza */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 p-3 rounded-lg bg-muted/50 border border-border/50"
-          >
-            <p className="text-xs text-muted-foreground text-center">
-              🔒 Il codice viene verificato tramite hash SHA-256.
-              <br />
-              Nessun dato viene inviato a server esterni.
-            </p>
-          </motion.div>
         </motion.div>
 
         {/* Footer */}
