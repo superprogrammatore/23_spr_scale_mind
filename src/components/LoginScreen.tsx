@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, KeyRound, Eye, EyeOff, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
+import { KeyRound, Eye, EyeOff, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { verifyAccessCode, setAuthenticated } from '@/lib/auth';
+import superProgrammatoreLogo from '@/assets/super-programmatore-logo.png';
 
 /**
  * LOGIN SCREEN
@@ -95,26 +96,16 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
           transition={{ duration: 0.4 }}
           className="glass-card p-8 border border-border/50"
         >
-          {/* Logo e titolo */}
+          {/* Logo Super Programmatore */}
           <div className="text-center mb-8">
-            <motion.div 
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent mb-4"
-              animate={{ 
-                boxShadow: [
-                  '0 0 20px hsl(180, 100%, 50%, 0.3)',
-                  '0 0 40px hsl(180, 100%, 50%, 0.5)',
-                  '0 0 20px hsl(180, 100%, 50%, 0.3)'
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Brain className="w-8 h-8 text-primary-foreground" />
-              </motion.div>
-            </motion.div>
+            <motion.img 
+              src={superProgrammatoreLogo}
+              alt="Super Programmatore"
+              className="w-48 h-auto mx-auto mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            />
             
             <h1 className="text-2xl font-bold mb-2">
               <span className="gradient-text">Scale</span>Mind
